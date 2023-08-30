@@ -11,12 +11,15 @@ using namespace DirectX;
 
 namespace
 {
+    
+    const float kDefaultMaxStereoDistance = 780.0f;  
+    const float kDefaultInterocularDistance = 1.25f;
     inline bool StereoProjectionHelper
     (
-        const STEREO_PARAMETERS& stereoParameters,
-        _Out_ float* fVirtualProjection,
-        _Out_ float* zNearWidth,
-        _Out_ float* zNearHeight,
+        const StereoParams& params, 
+        float* fVirtualEyeSeparation,
+        float* zNearPlaneWidth,
+        float* zNearPlaneHeight,
         float FovAngleY,
         float AspectRatio,
         float NearZ
