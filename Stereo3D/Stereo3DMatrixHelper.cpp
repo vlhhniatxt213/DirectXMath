@@ -121,6 +121,12 @@ XMMATRIX DirectX::StereoProjectionFovLH
     assert(!XMScalarNearEqual(FarZ, NearZ, 0.00001f));
 
     STEREO_PARAMETERS DefaultParameters = {};
+
+    float fVirtualProjection = 0.0f;
+    float zNearWidth = 0.0f;
+    float zNearHeight = 0.0f;
+    StereoProjectionHelper(*pStereoParameters, &fVirtualProjection, &zNearWidth, &zNearHeight, FovAngleY, AspectRatio, NearZ);
+
     if (pStereoParameters == nullptr)
     {
         StereoCreateDefaultParameters(DefaultParameters);
@@ -129,11 +135,6 @@ XMMATRIX DirectX::StereoProjectionFovLH
 
     assert(pStereoParameters->fStereoSeparationFactor >= 0.0f && pStereoParameters->fStereoSeparationFactor <= 1.0f);
     assert(pStereoParameters->fStereoExaggerationFactor >= 1.0f && pStereoParameters->fStereoExaggerationFactor <= 2.0f);
-
-    float fVirtualProjection = 0.0f;
-    float zNearWidth = 0.0f;
-    float zNearHeight = 0.0f;
-    StereoProjectionHelper(*pStereoParameters, &fVirtualProjection, &zNearWidth, &zNearHeight, FovAngleY, AspectRatio, NearZ);
 
     fVirtualProjection *= pStereoParameters->fStereoSeparationFactor; // incorporate developer defined bias
 
